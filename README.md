@@ -18,10 +18,10 @@
 
 
 # Examples:
-    _  _     _  _  _  _  _     -> sss s_s s_s sss s_s s_s s_s s_s s_s 
-  | _| _||_||_ |_   ||_||_|    -> ss| s_| s_| |_| |_s |_s ss| |_| |_|   
-  ||_  _|  | _||_|  ||_| _|    -> ss| |_s s_| ss| s_| |_| ss| |_| s_| 
-                               -> sss sss sss sss sss sss sss sss sss 
+  `  _  _     _  _  _  _  _ `   `-> sss s_s s_s sss s_s s_s s_s s_s s_s`
+  `| _| _||_||_ |_   ||_||_|`   `-> ss| s_| s_| |_| |_s |_s ss| |_| |_|`   
+  `||_  _|  | _||_|  ||_| _|`   `-> ss| |_s s_| ss| s_| |_| ss| |_| s_|` 
+  `                         `   `-> sss sss sss sss sss sss sss sss sss` 
 
 Take the policy number, break it up into 3 x 3 grids, read and return the number from each specific grid 
 
@@ -35,6 +35,7 @@ Take the policy number, break it up into 3 x 3 grids, read and return the number
 - Output: A Policy Number (int)
 
 - Hash? 
+```
     digits = {
     's_s|s||_|sss' => '0',
     'sssss|ss|sss' => '1',
@@ -47,7 +48,8 @@ Take the policy number, break it up into 3 x 3 grids, read and return the number
     's_s|_||_|sss' => '8',
     's_s|_|s_|sss' => '9'
   }
-
+```
+```
     digits = {
     ' _ | ||_|   ' => '0',
     '     |  |   ' => '1',
@@ -60,6 +62,7 @@ Take the policy number, break it up into 3 x 3 grids, read and return the number
     ' _ |_||_|   ' => '8',
     ' _ |_| _|   ' => '9'
   }
+``` 
 
 # Algorithm:
 - Open the File
