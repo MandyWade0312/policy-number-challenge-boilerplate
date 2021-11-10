@@ -18,10 +18,18 @@
 
 
 # Examples:
-  `  _  _     _  _  _  _  _ `   `-> sss s_s s_s sss s_s s_s s_s s_s s_s`
-  `| _| _||_||_ |_   ||_||_|`   `-> ss| s_| s_| |_| |_s |_s ss| |_| |_|`   
-  `||_  _|  | _||_|  ||_| _|`   `-> ss| |_s s_| ss| s_| |_| ss| |_| s_|` 
-  `                         `   `-> sss sss sss sss sss sss sss sss sss` 
+```
+    _  _     _  _  _  _  _    
+  | _| _||_||_ |_   ||_||_|      
+  ||_  _|  | _||_|  ||_| _|   
+                              
+```
+```
+1 -> sss s_s s_s sss s_s s_s s_s s_s s_s
+2 -> ss| s_| s_| |_| |_s |_s ss| |_| |_|
+3 -> ss| |_s s_| ss| s_| |_| ss| |_| s_|
+4 -> sss sss sss sss sss sss sss sss sss
+```
 
 Take the policy number, break it up into 3 x 3 grids, read and return the number from each specific grid 
 
