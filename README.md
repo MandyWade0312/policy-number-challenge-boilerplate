@@ -38,8 +38,8 @@ Take the policy number, break it up into 3 x 3 grids, read and return the number
 
 # Data Structure:
 - Input: A File
-    - Which needs to be opened 
-    - Needs to be read
+    - Which needs to be opened, Google "How to open a file Ruby" [How To Read & Write Files in Ruby](https://www.rubyguides.com/2015/05/working-with-files-ruby/)
+    - Needs to be read, see above Google
     - Need to go through the data to write out an entry (1 policy (made up of 9 numbers), 4 lines long = 27 characters each (first 3 lines has the policy number (s,|_), 4th line is a blank line (all s))
     - Need to loop through the entry & read it, make it into an actual number
 - Output: A Policy Number (int)
@@ -73,24 +73,34 @@ Take the policy number, break it up into 3 x 3 grids, read and return the number
     ' _ |_| _|   ' => '9'
   }
 ``` 
+- Need to write a rspec, Google "How to write rspec ruby" [The Definitive RSpec Tutorial With Examples](https://www.rubyguides.com/2018/07/rspec-tutorial/) and [Getting Started with RSpec](https://semaphoreci.com/community/tutorials/getting-started-with-rspec)
+  - describe method_name do 
+        context "given 'sample'" do <- (needed to pass in the sample text)
+            it "describe what the method does" do
+                Need an array to check the answers from the sample text
+                expect (NameOfModule.name_of_method('path to sample text')).to eq(array_from_above)
+            end
+    end
 
+  - To test rspec: bundle exec rspec
 # Algorithm:
-- Open the File
-- Read the File
 - Create a hash of "digits" based off the 4 rows from the entry (using underscores, spaces, and pipes)
-- Initialize the "text" using a method
-- Converting the rows to numbers
-  - Split the text by the \n into 4
-  - Map this text into lines
-  - Map these lines by line
-  - Scan the line and seperate then by 3 characters (/.../) 
-  - Make a grid (by transposing)
-  - Map the grid into character rows with the digits hash
-  - Join them all together
+- Create a method that takes in a file 
+    - Open the File
+    - Read the File
+    - Split the text into 4 lines 
+    - Map these lines by line
+    - Scan the line and seperate it by 3 characters (/.../) Google "Split a string by 3 characters in ruby" [Ruby regex for a split every four characters not working](https://stackoverflow.com/questions/1628673/ruby-regex-for-a-split-every-four-characters-not-working/1628694)
+    - Make a grid (by transposing) Google "3 by 3 grid ruby" [Turn Rows Into Columns With The Ruby Transpose Method](https://www.rubyguides.com/2017/10/ruby-transpose-method/)
+    - Map the grid into numbers to match with the digits hash
+    - Join them all together
+    - Take the string_of_integers and break them up into 9 characters 
+    - Map these into integers 
 
 # Code:
 module PolicyOcr
 
+    # - Create a hash of "digits" based off the 4 rows from the entry (using underscores, spaces, and pipes)
     DIGITS = {
         ' _ | ||_|   ' => '0',
         '     |  |   ' => '1',
@@ -103,31 +113,30 @@ module PolicyOcr
         ' _ |_||_|   ' => '8',
         ' _ |_| _|   ' => '9'
       }
-    DIGITS.default = '?'
 
-    def creating_numbers
-    # - Open the File
-    file = File.open("sample.txt")
-    # - Read the File
-    file_data = file.readlines.map(&:chomp)
-    # - Create a hash of "digits" based off the 4 rows from the entry (using underscores, spaces, and pipes)
-    # - Initialize the "text" using a method
-    # - Converting the rows to numbers
-    #   - Split the text by the \n into 4
-    file_data.split("\n").each_slice(4).map { |lines| decode(lines) }.join('')
-    #   - Map this text into lines
+    # - Create a method that takes in a File 
+    def self.make_a_policy_number(file_with_policies)
+        # - Open the File 
+        file = File.open(file_with_policies)
+        # - Read the File 
+        file_data = file.readlines.map(&:chomp)
+        #   - Split the text into 4 lines 
+        split_text = file_data.each_slice(4)
+        #   - Map these lines by line 
+        string_of_integers = split_text.map{ |lines| lines 
+            #   - Scan the line and separate it by 3 characters 
+            .map{ |line| line.scan(/.../) }
+            #   - Make a grid (by transposing) 
+            .transpose
+            #   - Map the grid into numbers to match with the digits hash 
+            .map{ |number| DIGITS[number.join] } }
+                #   - Join them all together 
+            .join
+        
+        # - Take the string_of_integers and break them up into 9 characters 
+        string_of_integers.scan(/.{1,9}/)
+        # - Map these into integers 
+        .map{ |policy| policy.to_i } 
     end
    
-    def decode(lines)
-    #   - Map these lines by line
-        lines.map{ |line| line.scan(/.../) }.
-    #   - Scan the line and seperate then by 3 characters (/.../) 
-    #   - Make a grid (by transposing)
-            transpose.
-    #   - Map the grid into character rows with the digits hash
-            map { |char_rows| DIGITS|[char_rows.join] }.
-    #   - Join them all together
-            join
-    end
-    
 end
