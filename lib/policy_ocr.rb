@@ -25,7 +25,7 @@ module PolicyOcr
         #   - Map these lines by line 
         string_of_integers = split_text.map{ |lines| lines 
             #   - Scan the line and seperate then by 3 characters 
-            .map{ |line| line.scan(/.../) }
+            .map{ |line| line.scan(/.{1,3}/) }
             #   - Make a grid (by transposing) 
             .transpose
             #   - Map the grid into numbers to match with the digits hash 
