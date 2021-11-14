@@ -90,7 +90,7 @@ Take the policy number, break it up into 3 x 3 grids, read and return the number
     - Read the File
     - Split the text into 4 lines 
     - Map these lines by line
-    - Scan the line and seperate it by 3 characters (/.../) Google "Split a string by 3 characters in ruby" [Ruby regex for a split every four characters not working](https://stackoverflow.com/questions/1628673/ruby-regex-for-a-split-every-four-characters-not-working/1628694)
+    - Scan the line and seperate it by 3 characters  Google "Split a string by 3 characters in ruby" [Ruby regex for a split every four characters not working](https://stackoverflow.com/questions/1628673/ruby-regex-for-a-split-every-four-characters-not-working/1628694)
     - Make a grid (by transposing) Google "3 by 3 grid ruby" [Turn Rows Into Columns With The Ruby Transpose Method](https://www.rubyguides.com/2017/10/ruby-transpose-method/)
     - Map the grid into numbers to match with the digits hash
     - Join them all together
@@ -125,7 +125,7 @@ module PolicyOcr
         #   - Map these lines by line 
         string_of_integers = split_text.map{ |lines| lines 
             #   - Scan the line and separate it by 3 characters 
-            .map{ |line| line.scan(/.../) }
+            .map{ |line| line.scan(/.{1,3}/) }
             #   - Make a grid (by transposing) 
             .transpose
             #   - Map the grid into numbers to match with the digits hash 
